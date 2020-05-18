@@ -1,27 +1,86 @@
-#container {
-  text-align: center;
+// #addicondiv{
+//   width: 100vw;
+//   position: absolute;
+//   bottom: 10px;
+//   text-align: center;
+// }
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+// #subjectcards{
+//   height: 220px;
+//   border-radius: 20px;
+// }
+
+// ::-webkit-scrollbar,
+// *::-webkit-scrollbar {
+//   display: none;
+// }
+
+ion-searchbar{
+  z-index: 50;
+  --background: #ffffff;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+ion-content {
+  --background: #fff url('../../assets/background.png') no-repeat center center / cover;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+.cardTitle {
+  margin-left: 15px;
+  font-size: 14px;
+  font-weight: 600;
 }
 
-#container a {
-  text-decoration: none;
+.cardLastReview {
+  margin-left: 15px;
+  margin-top: 10px;
+  font-size: 11px;
+  opacity: 0.6;
+}
+
+.cardDescription {
+  margin-left: 15px;
+  margin-top: 10px;
+  font-size: 11px;
+  opacity: 0.9;
+}
+
+.cardDescription2 {
+  margin-left: 15px;
+  font-size: 11px;
+  opacity: 0.9;
+}
+
+.lineDivider {
+  height: 0.5px;
+  background-color: black;
+  // opacity: 0.1px;
+}
+
+.progress {
+  height: 5px;
+  width: 40%;
+  // border-radius: 25px;
+  margin-left: 15px;
+}
+
+.cardImage {
+  width: 92%;
+  margin-top: 15px;
+  object-fit: cover;
+  border-radius: 20px;
+  margin-left: 4%;
+  height: 150px;
+}
+
+.goButton {
+  height: 33px;
+  // border-radius: 50px;
+  width: 100px;
+}
+
+.progress {
+  height: 5px;
+  width: 90%;
+  // border-radius: 25px;
+  margin-left: 15px;
 }

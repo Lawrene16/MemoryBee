@@ -1,0 +1,316 @@
+<div class="tinder" [hidden]="!cards.length">
+
+  <div id="tindercards" class="tinder--cards">
+
+    <div #tinderCard class="tinder--card" (transitionend)="handleShift()" *ngFor="let card of cards; let i = index"
+      [ngStyle]="{ zIndex: cards.length - i, transform: 'scale(' + (25 - i) / 25 + ') translateY(-' + 25 * i + 'px)' }">
+
+      <div style="border-radius:25px; padding-bottom: 15px; background-color: #ffffff;">
+        <img class="cardImage" #tinderCardImage [src]="card.img" (load)="tinderCardImage.style.opacity = 1">
+
+        <div>
+          <div style="width: 100vw; height: 20px;"></div>
+          <span class="cardTitle">{{card.title}}</span><br>
+          <span class="cardLastReview">Last Review April 09, 2020</span>
+          <div style="width: 100vw; height: 10px;"></div>
+          <span class="cardDescription2">Lorem Ipsum is simply dummy text of the printing and bla</span><br>
+          <span class="cardDescription">Lorem Ipsum is simply dummy text of the printing and bla</span><br>
+          <span class="cardDescription">Lorem Ipsum is simply dummy text of the printing and bla</span><br>
+          <span class="cardDescription">Lorem Ipsum is simply dummy</span><br>
+        </div>
+
+        <div class="subjectmasteryDiv">
+          <div style="width: 100vw; height: 20px;"></div>
+          <div style="margin-bottom: 5px;">
+            <span style="padding-left: 15px; font-size: 12px;">SUBJECT MASTERY</span>
+            <span style="padding-right: 30px; font-weight: 400; font-size: 12px; float: right;">70%</span>
+          </div>
+          <div class="progress" id="progress"></div>
+        </div>
+
+        <div class="cardFooter">
+          <div style="height: 0.5px; width: 100%; margin-bottom: 10px; background-color: black; opacity: 0.1;">
+          </div>
+          <p style="margin: 0px;" align="center">
+            <ion-button expand="round" class="goButton">
+              <span style="font-size: 16px;">GO</span>
+            </ion-button>
+          </p>
+        </div>
+      </div>
+
+<div style="background-color: #474747; color: #ffffff; height: 30%; width: 100%; margin-top: 15px;">
+  <ion-row style="padding-left: 10px; padding-right: 10px; padding-top: 5px;">
+    <ion-col size="3">
+      <span class="tableHeaders">TOPICS</span>
+      <ion-icon style="font-size: 7px;  padding-left: 5px;" name="arrow-down"></ion-icon>
+    </ion-col>
+
+    <ion-col size="3">
+      <span class="tableHeaders">HALF LIFE</span>
+      <ion-icon style="font-size: 7px;  padding-left: 5px;" name="arrow-down"></ion-icon>
+    </ion-col>
+
+    <ion-col size="3.5">
+      <span class="tableHeaders">PROGRESS</span>
+      <ion-icon style="font-size: 7px;  padding-left: 5px;" name="arrow-down"></ion-icon>
+    </ion-col>
+
+    <ion-col style="padding-top: 5px; padding-left: 0px; padding-right: 0px;" size="2.5">
+      <span class="tableHeaders">MASTERY</span>
+      <ion-icon style="font-size: 7px;  padding-left: 5px;" name="arrow-down"></ion-icon>
+    </ion-col>
+  </ion-row>
+
+  <div style="height: 0.7px; width: 91%; margin-left: 15px; background-color: white; opacity: 0.6;"></div>
+
+  <ion-row style="padding-left: 10px; padding-right: 10px;">
+    <ion-col size="3">
+      <span class="tableTexts">Test 2</span>
+    </ion-col>
+
+    <ion-col size="3">
+      <span class="tableTexts">May 1, 2020</span>
+    </ion-col>
+
+    <ion-col size="3.5">
+      <span class="tableTexts" style="padding-left: 10px;">65/100</span>
+    </ion-col>
+
+    <ion-col style="padding-top: 5px; padding-left: 0px; padding-right: 0px;" size="2.5">
+      <span class="tableTexts" style="padding-left: 10px;">50%</span>
+    </ion-col>
+  </ion-row>
+
+  <div style="height: 1px; width: 91%; margin-left: 15px; background-color: white; opacity: 0.5;"></div>
+
+  <ion-row style="padding-left: 10px; padding-right: 10px;">
+    <ion-col size="3">
+      <span class="tableTexts">Test 2</span>
+    </ion-col>
+
+    <ion-col size="3">
+      <span class="tableTexts">April 25, 2020</span>
+    </ion-col>
+
+    <ion-col size="3.5">
+      <span class="tableTexts" style="padding-left: 10px;">57/100</span>
+    </ion-col>
+
+    <ion-col style="padding-top: 5px; padding-left: 0px; padding-right: 0px;" size="2.5">
+      <span class="tableTexts" style="padding-left: 10px;">80%</span>
+    </ion-col>
+  </ion-row>
+
+  <div style="height: 1px; width: 91%; margin-left: 15px; background-color: white; opacity: 0.6;"></div>
+
+  <ion-row style="padding-left: 10px; padding-right: 10px;">
+    <ion-col size="3">
+      <span class="tableTexts">Test 3</span>
+    </ion-col>
+
+    <ion-col size="3">
+      <span class="tableTexts">April 25, 2020</span>
+    </ion-col>
+
+    <ion-col size="3.5">
+      <span class="tableTexts" style="padding-left: 10px;">10/100</span>
+    </ion-col>
+
+    <ion-col style="padding-top: 5px; padding-left: 0px; padding-right: 0px;" size="2.5">
+      <span class="tableTexts" style="padding-left: 10px;">60%</span>
+    </ion-col>
+  </ion-row>
+
+  <div style="height: 1px; width: 91%; margin-left: 15px; background-color: white; opacity: 0.6;"></div>
+
+  <ion-row style="padding-left: 10px; padding-right: 10px;">
+    <ion-col size="3">
+      <span class="tableTexts">Test 4</span>
+    </ion-col>
+
+    <ion-col size="3">
+      <span class="tableTexts">April 25, 2020</span>
+    </ion-col>
+
+    <ion-col size="3.5">
+      <span class="tableTexts" style="padding-left: 10px;">30/100</span>
+    </ion-col>
+
+    <ion-col style="padding-top: 5px; padding-left: 0px; padding-right: 0px;" size="2.5">
+      <span class="tableTexts" style="padding-left: 10px;">40%</span>
+    </ion-col>
+  </ion-row>
+</div>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="tinder" [hidden]="!cards.length">
+
+  <div id="tindercards" class="tinder--cards" (pan)="handlePan($event)" (panend)="handlePanEnd($event)">
+
+    <div #tinderCard class="tinder--card" (transitionend)="handleShift()" *ngFor="let card of cards; let i = index"
+      [ngStyle]="{ zIndex: cards.length - i, transform: 'scale(' + (20 - i) / 20 + ') translateY(-'
+      + 20 * i + 'px)' }">
+
+      <div style="border-radius:25px; padding-bottom: 15px; background-color: #ffffff;">
+        <img class="cardImage" #tinderCardImage [src]="card.img" (load)="tinderCardImage.style.opacity = 1">
+
+        <div>
+          <div style="width: 100vw; height: 20px;"></div>
+          <span class="cardTitle">{{card.Subject}}</span><br>
+          <span class="cardLastReview">Last Review April 09, 2020</span>
+          <div style="width: 100vw; height: 10px;"></div>
+          <span class="cardDescription2">Lorem Ipsum is simply dummy text of the printing and bla</span><br>
+          <span class="cardDescription">Lorem Ipsum is simply dummy text of the printing and bla</span><br>
+          <span class="cardDescription">Lorem Ipsum is simply dummy text of the printing and bla</span><br>
+          <span class="cardDescription">Lorem Ipsum is simply dummy</span><br>
+        </div>
+
+        <div class="subjectmasteryDiv">
+          <div style="width: 100vw; height: 20px;"></div>
+          <div style="margin-bottom: 5px;">
+            <span style="padding-left: 15px; font-size: 12px;">SUBJECT MASTERY</span>
+            <span style="padding-right: 30px; font-weight: 400; font-size: 12px; float: right;">70%</span>
+          </div>
+          <div class="progress" id="progress"></div>
+        </div>
+
+        <div class="cardFooter">
+          <div style="height: 0.5px; width: 100%; margin-bottom: 10px; background-color: black; opacity: 0.1;">
+          </div>
+          <p style="margin: 0px;" align="center">
+            <ion-button expand="round" class="goButton">
+              <span style="font-size: 16px;">GO</span>
+            </ion-button>
+          </p>
+        </div>
+
+      </div>
+
+
+      <div style="background-color: #474747; color: #ffffff; height: 30%; width: 100%; margin-top: 15px;">
+        <ion-row style="padding-left: 10px; padding-right: 10px; padding-top: 5px;">
+          <ion-col size="3">
+            <span class="tableHeaders">TOPICS</span>
+            <ion-icon style="font-size: 7px;  padding-left: 5px;" name="arrow-down"></ion-icon>
+          </ion-col>
+
+          <ion-col size="3">
+            <span class="tableHeaders">HALF LIFE</span>
+            <ion-icon style="font-size: 7px;  padding-left: 5px;" name="arrow-down"></ion-icon>
+          </ion-col>
+
+          <ion-col size="3.5">
+            <span class="tableHeaders">PROGRESS</span>
+            <ion-icon style="font-size: 7px;  padding-left: 5px;" name="arrow-down"></ion-icon>
+          </ion-col>
+
+          <ion-col style="padding-top: 5px; padding-left: 0px; padding-right: 0px;" size="2.5">
+            <span class="tableHeaders">MASTERY</span>
+            <ion-icon style="font-size: 7px;  padding-left: 5px;" name="arrow-down"></ion-icon>
+          </ion-col>
+        </ion-row>
+
+        <div style="height: 0.7px; width: 91%; margin-left: 15px; background-color: white; opacity: 0.6;"></div>
+
+        <ion-row style="padding-left: 10px; padding-right: 10px;">
+          <ion-col size="3">
+            <span class="tableTexts">Test 2</span>
+          </ion-col>
+
+          <ion-col size="3">
+            <span class="tableTexts">May 1, 2020</span>
+          </ion-col>
+
+          <ion-col size="3.5">
+            <span class="tableTexts" style="padding-left: 10px;">65/100</span>
+          </ion-col>
+
+          <ion-col style="padding-top: 5px; padding-left: 0px; padding-right: 0px;" size="2.5">
+            <span class="tableTexts" style="padding-left: 10px;">50%</span>
+          </ion-col>
+        </ion-row>
+
+        <div style="height: 1px; width: 91%; margin-left: 15px; background-color: white; opacity: 0.5;"></div>
+
+        <ion-row style="padding-left: 10px; padding-right: 10px;">
+          <ion-col size="3">
+            <span class="tableTexts">Test 2</span>
+          </ion-col>
+
+          <ion-col size="3">
+            <span class="tableTexts">April 25, 2020</span>
+          </ion-col>
+
+          <ion-col size="3.5">
+            <span class="tableTexts" style="padding-left: 10px;">57/100</span>
+          </ion-col>
+
+          <ion-col style="padding-top: 5px; padding-left: 0px; padding-right: 0px;" size="2.5">
+            <span class="tableTexts" style="padding-left: 10px;">80%</span>
+          </ion-col>
+        </ion-row>
+
+        <div style="height: 1px; width: 91%; margin-left: 15px; background-color: white; opacity: 0.6;"></div>
+
+        <ion-row style="padding-left: 10px; padding-right: 10px;">
+          <ion-col size="3">
+            <span class="tableTexts">Test 3</span>
+          </ion-col>
+
+          <ion-col size="3">
+            <span class="tableTexts">April 25, 2020</span>
+          </ion-col>
+
+          <ion-col size="3.5">
+            <span class="tableTexts" style="padding-left: 10px;">10/100</span>
+          </ion-col>
+
+          <ion-col style="padding-top: 5px; padding-left: 0px; padding-right: 0px;" size="2.5">
+            <span class="tableTexts" style="padding-left: 10px;">60%</span>
+          </ion-col>
+        </ion-row>
+
+        <div style="height: 1px; width: 91%; margin-left: 15px; background-color: white; opacity: 0.6;"></div>
+
+        <ion-row style="padding-left: 10px; padding-right: 10px;">
+          <ion-col size="3">
+            <span class="tableTexts">Test 4</span>
+          </ion-col>
+
+          <ion-col size="3">
+            <span class="tableTexts">April 25, 2020</span>
+          </ion-col>
+
+          <ion-col size="3.5">
+            <span class="tableTexts" style="padding-left: 10px;">30/100</span>
+          </ion-col>
+
+          <ion-col style="padding-top: 5px; padding-left: 0px; padding-right: 0px;" size="2.5">
+            <span class="tableTexts" style="padding-left: 10px;">40%</span>
+          </ion-col>
+        </ion-row>
+      </div>
+
+
+    </div>
+  </div>
+</div> -->

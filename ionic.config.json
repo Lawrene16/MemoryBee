@@ -1,5 +1,7 @@
 {
   "name": "MemoryBee",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
