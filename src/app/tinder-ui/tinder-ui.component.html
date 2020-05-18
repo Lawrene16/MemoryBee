@@ -23,9 +23,9 @@
           <div style="width: 100vw; height: 20px;"></div>
           <div style="margin-bottom: 5px;">
             <span style="padding-left: 15px; font-size: 12px;">SUBJECT MASTERY</span>
-            <span style="padding-right: 30px; font-weight: 400; font-size: 12px; float: right;">70%</span>
+            <span style="padding-right: 30px; font-weight: 400; font-size: 12px; float: right;">{{card.progress}}%</span>
           </div>
-          <div class="progress" id="progress"></div>
+          <ion-progress-bar class="progress" color="success" [value]="card.progress/100"></ion-progress-bar>
         </div>
 
         <div class="cardFooter">

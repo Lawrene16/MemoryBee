@@ -22,6 +22,7 @@ export class TinderUiComponent {
     img: string;
     title: string;
     description: string;
+    progress: number
   }>;
   cardOpacity
   bar: any;
@@ -33,6 +34,8 @@ export class TinderUiComponent {
   transitionInProgress: boolean; // state variable that indicates currently there is transition on-going
   heartVisible: boolean;
   crossVisible: boolean;
+
+  test = 50;
 
   constructor(private renderer: Renderer2) {
     setTimeout(() => {
@@ -46,29 +49,7 @@ export class TinderUiComponent {
         } else if (ev.type == "panend") {
         }
       });
-
-      this.setUpProgressBar();
     }, 300);
-
-
-  }
-
-  setUpProgressBar(){
-      this.bar = new ProgressBar.Line("#progress", {
-        strokeWidth: 4,
-        easing: "easeInOut",
-        duration: 800,
-        color: "#4CAF50",
-        progress: 0.6,
-        trailColor: "#eee",
-        // radius: '25px',
-        trailWidth: 5,
-        svgStyle: { width: "100%", height: "100%" },
-      });
-
-    setTimeout(() => {
-      this.bar.animate(0.7); // Number from 0.0 to 1.0
-    }, 800);
   }
 
   userClickedButton(event, heart) {

@@ -15,7 +15,7 @@ export class HomePage {
   subjectsListStrings = [];
   fullSubjectList = [];
   bar: any;
-  i = 0;
+  // i = 0;
 
 
   constructor(public httpClient: HttpClient) {
@@ -52,101 +52,55 @@ export class HomePage {
         img: "https://placeimg.com/300/300/people",
         title: "Demo card 1",
         description: "This is a demo for Tinder like swipe cards",
+        progress: 70,
       },
       {
         img: "https://placeimg.com/300/300/animals",
         title: "Demo card 2",
         description: "This is a demo for Tinder like swipe cards",
+        progress: 59,
       },
       {
         img: "https://placeimg.com/300/300/nature",
         title: "Demo card 3",
         description: "This is a demo for Tinder like swipe cards",
+        progress: 60,
       },
       {
         img: "https://placeimg.com/300/300/tech",
         title: "Demo card 4",
         description: "This is a demo for Tinder like swipe cards",
+        progress: 30,
       },
       {
         img: "https://placeimg.com/300/300/arch",
         title: "Demo card 5",
         description: "This is a demo for Tinder like swipe cards",
+        progress: 45,
       },
       {
         img: "https://placeimg.com/300/300/people",
         title: "Demo card 1",
         description: "This is a demo for Tinder like swipe cards",
+        progress: 100,
       },
       {
         img: "https://placeimg.com/300/300/animals",
         title: "Demo card 2",
         description: "This is a demo for Tinder like swipe cards",
+        progress: 20,
       },
       {
         img: "https://placeimg.com/300/300/nature",
         title: "Demo card 3",
         description: "This is a demo for Tinder like swipe cards",
+        progress: 55,
       },
       {
         img: "https://placeimg.com/300/300/tech",
         title: "Demo card 4",
         description: "This is a demo for Tinder like swipe cards",
-      },
-      {
-        img: "https://placeimg.com/300/300/arch",
-        title: "Demo card 5",
-        description: "This is a demo for Tinder like swipe cards",
-      },
-      {
-        img: "https://placeimg.com/300/300/people",
-        title: "Demo card 1",
-        description: "This is a demo for Tinder like swipe cards",
-      },
-      {
-        img: "https://placeimg.com/300/300/animals",
-        title: "Demo card 2",
-        description: "This is a demo for Tinder like swipe cards",
-      },
-      {
-        img: "https://placeimg.com/300/300/nature",
-        title: "Demo card 3",
-        description: "This is a demo for Tinder like swipe cards",
-      },
-      {
-        img: "https://placeimg.com/300/300/tech",
-        title: "Demo card 4",
-        description: "This is a demo for Tinder like swipe cards",
-      },
-      {
-        img: "https://placeimg.com/300/300/arch",
-        title: "Demo card 5",
-        description: "This is a demo for Tinder like swipe cards",
-      },
-      {
-        img: "https://placeimg.com/300/300/people",
-        title: "Demo card 1",
-        description: "This is a demo for Tinder like swipe cards",
-      },
-      {
-        img: "https://placeimg.com/300/300/animals",
-        title: "Demo card 2",
-        description: "This is a demo for Tinder like swipe cards",
-      },
-      {
-        img: "https://placeimg.com/300/300/nature",
-        title: "Demo card 3",
-        description: "This is a demo for Tinder like swipe cards",
-      },
-      {
-        img: "https://placeimg.com/300/300/tech",
-        title: "Demo card 4",
-        description: "This is a demo for Tinder like swipe cards",
-      },
-      {
-        img: "https://placeimg.com/300/300/arch",
-        title: "Demo card 5",
-        description: "This is a demo for Tinder like swipe cards",
+        progress: 39,
       },
     ];
   }
