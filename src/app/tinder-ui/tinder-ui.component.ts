@@ -22,7 +22,8 @@ export class TinderUiComponent {
     img: string;
     title: string;
     description: string;
-    progress: number
+    progress: number;
+    topics: Array<string>
   }>;
   cardOpacity
   bar: any;
