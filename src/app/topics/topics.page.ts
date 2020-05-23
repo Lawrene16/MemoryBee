@@ -6035,7 +6035,6 @@ export class TopicsPage implements OnInit {
         decks: this.getDecks(this.res, this.subject, topicString),
       });
     });
-    console.log(this.topicsArray);
 
 
 

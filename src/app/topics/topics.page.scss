@@ -10,6 +10,17 @@ ion-content {
         --overflow: hidden;
 }
 
+#topicssCard {
+        height: 37%;
+        border-radius: 5px;
+        overflow: auto;
+        width: 92vw;
+        margin: 15px;
+        position: absolute;
+        top: 6vh;
+}
+
+
 #questionsCard{
         // height: 37%;
         border-radius: 5px;

@@ -1,10 +1,12 @@
 <ion-content>
 
+
+  <!-- Header -->
   <div style="height: 110px; background: linear-gradient(13.32deg, #3490BF 5.32%, #38C1C7 49.46%, #358DBF 94.68%);">
     <ion-row style="padding: 0px; z-index: 30; color: white; font-size: 15px; padding-top: 15px;">
       <ion-col size="0.5">
       </ion-col>
-      <ion-col size="1" routerLink="/home" routerDirection="forward">
+      <ion-col style="z-index: 9;"size="1" routerLink="/home" routerDirection="forward">
         <img src="assets/left.png">
       </ion-col>
       <ion-col size="6">
@@ -18,8 +20,10 @@
 
   <div class="pageBackground">
 
+
     <!-- Ngfor will be the topics string array -->
     <app-tinder-ui [cards]="topicsArray"></app-tinder-ui>
+
 
     <ion-card [ngStyle]="{'height': cardheight}" id="questionsCard"
       >

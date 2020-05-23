@@ -4,7 +4,7 @@
 
     <div #tinderCard class="tinder--card" (pan)="handlePan($event)" (panend)="handlePanEnd($event)"
       (transitionend)="handleShift()" *ngFor="let card of cards; let i = index"
-      [ngStyle]="{ zIndex: cards.length - i, height: card.cardHeight, transform: 'scale(' + (21 - i) / 21 + ') translateY(-' + 21 * i + 'px)' }">
+      [ngStyle]="{ zIndex: cards.length - i, opacity: card.opacity, height: card.cardHeight, transform: 'scale(' + (21 - i) / 21 + ') translateY(-' + 21 * i + 'px)' }">
 
       <div style="margin-top: 20px; margin-left: 10px; font-size: 16px; color: #3F96C2;">{{card.title}}</div>
 

@@ -24,12 +24,22 @@ export class TinderUiComponent {
     decks: any;
     isContentHidden: any;
     cardHeight;
+    opacity: any;
     deckIsChecked: any;
   }>;
 
-  currentCard;
+  cardsFiltered: Array<{
+    title: string;
+    description: string;
+    decks: any;
+    isContentHidden: any;
+    cardHeight;
+    opacity: any;
+    deckIsChecked: any;
+  }>;
 
-  cardOpacity;
+
+
   bar: any;
   @ViewChildren("tinderCard") tinderCards: QueryList<ElementRef>;
   tinderCardsArray: Array<ElementRef>;
@@ -46,28 +56,35 @@ export class TinderUiComponent {
   buttonValue = "study";
   hideStudyProgress = false;
 
+  currentCardList = 0;
+
   constructor(private renderer: Renderer2) {
     setTimeout(() => {
       let tinderCardElement = document.getElementById("tindercards");
       let hamming = new Hammer(tinderCardElement);
       hamming.on("panleft panright tap press pressup panend", (ev) => {
-
-      //   if (ev.type == "panleft") {
-      //     // console.log
-      //     this.userClickedButton(ev, false);
-      //   } else if (ev.type == "panright") {
-      //     this.userClickedButton(ev, true);
-        
-      if (ev.type == "panend") {
-          this.handlePanEnd(ev)
-      }
-      else {
-        // if(ev.type == "panleft" || ev.type == "panright")
-          this.handlePan(ev)
+        if (ev.type == "panend") {
+          this.handlePanEnd(ev);
+        } else if(ev.type == "panright"){
+          // if(ev.type == "panleft" || ev.type == "panright")
+          this.handlePan(ev);
         }
-      }); 
+        // else if (ev.type == "panleft") {
+        //     this.cards.reverse()
 
-      // var checkBox = document.getElementById("myCheck");
+        // }
+      });
+
+      this.cardsFiltered = this.cards;
+      this.cards = [];
+      for (var i = 0; i < this.cardsFiltered.length; i++) {
+        if (i < 3) {
+            console.log(i)
+          this.cards.push(this.cardsFiltered[i]);
+          this.currentCardList = this.cards.length;
+        }
+        this.changeOpacity()
+      }
     }, 300);
   }
 
@@ -192,10 +209,58 @@ export class TinderUiComponent {
     if (this.shiftRequired) {
       this.shiftRequired = false;
 
-      // this.currentCard = this.cards[0];
-      this.cards.shift();
-      // this.cards.push(this.currentCard);
+      // this.cards.shift();
+
+      this.switchArrayObjects();
+
+
+      // this.arrayMove(this.cards, 0, 2)
+      this.changeOpacity();
+
+      console.log(this.cards);
+
+      console.log(this.cardsFiltered)
     }
+  }
+
+  // Moves elements in an array
+  arrayMove(arr, old_index, new_index) {
+    if (new_index >= arr.length) {
+        var k = new_index - arr.length + 1;
+        while (k--) {
+            arr.push(undefined);
+        }
+    }
+    arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
+};
+
+  switchArrayObjects() {
+    
+    this.cardsFiltered.push(this.cards[0]);
+    this.cardsFiltered.shift();
+    this.cards.shift()
+    this.cards.push(this.cardsFiltered[2])
+
+  }
+
+  changeOpacity() {
+          for (var i = 0; i < this.cards.length; i++) {
+            if (i < 3) {
+              switch (i) {
+                case 0:
+                  this.cards[i].opacity = 1;
+                  break;
+
+                case 1:
+                  this.cards[i].opacity = 0.7;
+                  break;
+
+                case 2:
+                  this.cards[i].opacity = 0.4;
+                  break;
+              }
+            }
+          }
   }
 
   emitChoice(heart, card) {
