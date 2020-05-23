@@ -1,6 +1,5 @@
 <ion-content>
 
-
   <!-- Header -->
   <div style="height: 110px; background: linear-gradient(13.32deg, #3490BF 5.32%, #38C1C7 49.46%, #358DBF 94.68%);">
     <ion-row style="padding: 0px; z-index: 30; color: white; font-size: 15px; padding-top: 15px;">
@@ -20,7 +19,6 @@
 
   <div class="pageBackground">
 
-
     <!-- Ngfor will be the topics string array -->
     <app-tinder-ui [cards]="topicsArray"></app-tinder-ui>
 
@@ -28,8 +26,16 @@
     <ion-card [ngStyle]="{'height': cardheight}" id="questionsCard"
       >
       <div style="margin: 9px;">
-        <div id="questionsTitle">
+        <div id="questionsTitle" (click)="expandQuestions()">
+          <ion-row style="margin: 0px; padding: 0px;">
+            <ion-col style="padding: 0px;" size="11">
           <span style="font-weight: 600; font-size: 11px;">Questions</span>
+            </ion-col>
+            <ion-col style="padding: 0px;" size="1">
+          <img height="20px" src="../../assets/expand.png">
+
+            </ion-col>
+          </ion-row>
           <div style="height: 0.7px; margin-top: 9px; width: 100%; background-color: black; opacity: 0.1; "></div>
         </div>
         
@@ -65,6 +71,7 @@
         </div>
       </div>
     </ion-card>
+    
 
     <!-- Buttom buttons -->
     <div style="width: 100%; position: absolute; bottom: 7px;">

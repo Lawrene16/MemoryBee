@@ -9,6 +9,19 @@ import { ActivatedRoute, Router } from "@angular/router";
 export class TopicsPage implements OnInit {
   cards = ["fdfd", "dfjdwfk", "djjdjfjdhfdj"];
 
+  // topicTitlesArray: any = [];
+  // res: any;
+  // subject: any = "";
+
+  topicTitlesArray: any = [
+    "Christology",
+    "Covenants",
+    "Doctrine of Man",
+    "Eschatology",
+    "Hermeneutics",
+    "Soteriology",
+    "Theology Proper",
+  ];
   res = [
     {
       Subject: "RPCGA Licensure",
@@ -5988,18 +6001,6 @@ export class TopicsPage implements OnInit {
     },
   ];
   subject: any = "RPCGA Licensure";
-  topicTitlesArray: any = [
-    "Christology",
-    "Covenants",
-    "Doctrine of Man",
-    "Eschatology",
-    "Hermeneutics",
-    "Soteriology",
-    "Theology Proper",
-  ];
-  // topicTitlesArray: any = [];
-  // res: any;
-  // subject: any = "";
 
   topicsArray: any = [];
   questionsToDisplay: any = [];
@@ -6018,58 +6019,61 @@ export class TopicsPage implements OnInit {
     //     this.topicTitlesArray = this.router.getCurrentNavigation().extras.state.topics;
     //     this.res = this.router.getCurrentNavigation().extras.state.res;
 
-    //     // this.topicTitlesArray.forEach(topicString => {
-    //     //   this.topicsArray.push({
-    //     //     topic: topicString,
-    //     //     questions: this.getQuestions(this.res, this.subject, topicString)
-    //     //   })
-    //     // });
-    //     //       console.log(this.topicsArray);
+    //     this.topicTitlesArray.forEach((topicString) => {
+    //       this.topicsArray.push({
+    //         title: topicString,
+    //         questions: this.getQuestions(this.res, this.subject, topicString),
+    //         decks: this.getDecks(this.res, this.subject, topicString),
+    //       });
+    //     });
     //   }
     // });
 
-    this.topicTitlesArray.forEach((topicString) => {
-      this.topicsArray.push({
-        title: topicString,
-        questions: this.getQuestions(this.res, this.subject, topicString),
-        decks: this.getDecks(this.res, this.subject, topicString),
+            this.topicTitlesArray.forEach((topicString) => {
+              this.topicsArray.push({
+                title: topicString,
+                questions: this.getQuestions(
+                  this.res,
+                  this.subject,
+                  topicString
+                ),
+                decks: this.getDecks(this.res, this.subject, topicString),
+              });
+            });
+  }
+
+  expandQuestions(){
+    if(this.cardheight == "69%"){
+      this.cardheight = "37%";
+      this.topicsArray.forEach((el) => {
+        el.isContentHidden = false;
+        el.cardHeight = "72%";
+
       });
-    });
 
-
-
-
-    // THis is meant to be the logic for viewing questions card in full screen
-      // let tinderQuestionElement = document.getElementById("questionsCard");
-      // let hammer = new Hammer(tinderQuestionElement);
-      
-      // hammer.add( new Hammer.Pan({ direction: Hammer.DIRECTION_ALL, threshold: 0 }) );
-
-      // // tie in the handler that will be called
-      // hammer.on("pan", (ev) =>{
-      //   if(ev.target.id == "questionsTitle"){
-      //   this.handleDrag(ev, tinderQuestionElement)
-      //   }
-      // });
+    }else if(this.cardheight == "37%"){
+      this.cardheight = "69%";
+      this.topicsArray.forEach((el) => {
+        el.isContentHidden = true;
+        el.cardHeight = "15%";
+      });
+    }
   }
 
   handleDrag(ev, element) {
-
     if (!this.isDragging) {
-        this.isDragging = true;
-  }
+      this.isDragging = true;
+    }
 
-  if (ev.isFinal) {
-
-          // Upward drag
+    if (ev.isFinal) {
+      // Upward drag
       if (ev.deltaY < 0) {
-      this.cardheight = "68.5%";
+        this.cardheight = "68.5%";
 
         // this.topicsArray.forEach(topic =>{
         //   topic.isContentHidden = true;
         //   topic.cardHeight = "12%"
         // })
-
       } else if (ev.deltaY > 0) {
         this.cardheight = "37%";
 
@@ -6078,11 +6082,11 @@ export class TopicsPage implements OnInit {
         //   topic.cardHeight = "52%"
         // })
       }
-    this.isDragging = false;
+      this.isDragging = false;
+    }
   }
-}
 
-// Fetches all questions based on their subject and topic
+  // Fetches all questions based on their subject and topic
   getQuestions(jsonData, subject, topic) {
     var questionsArray = [];
     jsonData.forEach((element) => {
@@ -6111,11 +6115,11 @@ export class TopicsPage implements OnInit {
     jsonData.forEach((element) => {
       if (element.Subject == subject && element.Topic == topic) {
         // decksArray.push(element.Deck)
-        
+
         decksArray.push({
           title: element.Deck,
           dates: ["15th March", "18th March", "12th March", "15th March"],
-          isChecked: true
+          isChecked: true,
         });
       }
     });

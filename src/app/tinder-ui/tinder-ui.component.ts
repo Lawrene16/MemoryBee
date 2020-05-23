@@ -8,7 +8,7 @@ import {
   Output,
   EventEmitter,
 } from "@angular/core";
-
+// import interact from "interactjs";
 
 @Component({
   selector: "app-tinder-ui",
@@ -38,8 +38,6 @@ export class TinderUiComponent {
     deckIsChecked: any;
   }>;
 
-
-
   bar: any;
   @ViewChildren("tinderCard") tinderCards: QueryList<ElementRef>;
   tinderCardsArray: Array<ElementRef>;
@@ -56,35 +54,44 @@ export class TinderUiComponent {
   buttonValue = "study";
   hideStudyProgress = false;
 
-  currentCardList = 0;
-
   constructor(private renderer: Renderer2) {
     setTimeout(() => {
+      this.cardsFiltered = this.cards;
+      this.cards = [];
+      for (var i = 0; i < this.cardsFiltered.length; i++) {
+        if (i < 3) {
+          console.log(i);
+          this.cards.push(this.cardsFiltered[i]);
+        }
+        this.changeOpacity();
+      }
+
       let tinderCardElement = document.getElementById("tindercards");
       let hamming = new Hammer(tinderCardElement);
       hamming.on("panleft panright tap press pressup panend", (ev) => {
         if (ev.type == "panend") {
           this.handlePanEnd(ev);
-        } else if(ev.type == "panright"){
-          // if(ev.type == "panleft" || ev.type == "panright")
+        } else if (ev.type == "panright") {
+          if (this.cardsFiltered.length > 2) {
           this.handlePan(ev);
+          }
         }
-        // else if (ev.type == "panleft") {
-        //     this.cards.reverse()
-
-        // }
       });
 
-      this.cardsFiltered = this.cards;
-      this.cards = [];
-      for (var i = 0; i < this.cardsFiltered.length; i++) {
-        if (i < 3) {
-            console.log(i)
-          this.cards.push(this.cardsFiltered[i]);
-          this.currentCardList = this.cards.length;
-        }
-        this.changeOpacity()
-      }
+      // interact(".tinder--cards").draggable({
+      //   inertia: true,
+      //   autoScroll: true,
+      //   listeners: {
+      //     move(event) {
+      //       console.log(event);
+      //       this.handlePan(event);
+      //     },
+      //     end(event) {
+      //       console.log(event);
+      //       this.handlePanEnd(event);
+      //     },
+      //   },
+      // });
     }, 300);
   }
 
@@ -152,6 +159,45 @@ export class TinderUiComponent {
     this.shiftRequired = true;
   }
 
+  // handlePan(event) {
+  //   if (
+  //     event.delta.x === 0 ||
+  //     !this.cards.length
+  //   )
+  //     return;
+
+  //   if (this.transitionInProgress) {
+  //     this.handleShift();
+  //   }
+
+  //   this.renderer.addClass(this.tinderCardsArray[0].nativeElement, "moving");
+
+  //   if (event.delta.x > 0) {
+  //     this.toggleChoiceIndicator(false, true);
+  //   }
+  //   if (event.delta.x < 0) {
+  //     this.toggleChoiceIndicator(true, false);
+  //   }
+
+  //   let xMulti = event.delta.x * 0.03;
+  //   let yMulti = event.delta.y / 80;
+  //   let rotate = xMulti * yMulti;
+
+  //   this.renderer.setStyle(
+  //     this.tinderCardsArray[0].nativeElement,
+  //     "transform",
+  //     "translate(" +
+  //       event.deltaX +
+  //       "px, " +
+  //       event.deltaY +
+  //       "px) rotate(" +
+  //       rotate +
+  //       "deg)"
+  //   );
+
+  //   this.shiftRequired = true;
+  // }
+
   handlePanEnd(event) {
     this.toggleChoiceIndicator(false, false);
 
@@ -212,55 +258,35 @@ export class TinderUiComponent {
       // this.cards.shift();
 
       this.switchArrayObjects();
-
-
-      // this.arrayMove(this.cards, 0, 2)
       this.changeOpacity();
-
-      console.log(this.cards);
-
-      console.log(this.cardsFiltered)
     }
   }
 
-  // Moves elements in an array
-  arrayMove(arr, old_index, new_index) {
-    if (new_index >= arr.length) {
-        var k = new_index - arr.length + 1;
-        while (k--) {
-            arr.push(undefined);
-        }
-    }
-    arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
-};
-
   switchArrayObjects() {
-    
     this.cardsFiltered.push(this.cards[0]);
     this.cardsFiltered.shift();
-    this.cards.shift()
-    this.cards.push(this.cardsFiltered[2])
-
+    this.cards.shift();
+    this.cards.push(this.cardsFiltered[this.cards.length]);
   }
 
   changeOpacity() {
-          for (var i = 0; i < this.cards.length; i++) {
-            if (i < 3) {
-              switch (i) {
-                case 0:
-                  this.cards[i].opacity = 1;
-                  break;
+    for (var i = 0; i < this.cards.length; i++) {
+      if (i < 3) {
+        switch (i) {
+          case 0:
+            this.cards[i].opacity = 1;
+            break;
 
-                case 1:
-                  this.cards[i].opacity = 0.7;
-                  break;
+          case 1:
+            this.cards[i].opacity = 0.7;
+            break;
 
-                case 2:
-                  this.cards[i].opacity = 0.4;
-                  break;
-              }
-            }
-          }
+          case 2:
+            this.cards[i].opacity = 0.4;
+            break;
+        }
+      }
+    }
   }
 
   emitChoice(heart, card) {

@@ -6069,16 +6069,6 @@ export class HomePage {
         // questions
       });
     }
-
-    // console.log(this.getTopics(this.res, "RPCGA Licensure"));
-    // console.log(
-    //   this.getQuestions(
-    //     this.res,
-    //     "RPCGA Licensure",
-    //     this.getTopics(this.res, "RPCGA Licensure")[0]
-    //   )
-    // );
-
     this.cardsFiltered = this.cards;
   }
 
@@ -6118,7 +6108,11 @@ export class HomePage {
           // questions: this.getQuestions(this.res, this.cardsFiltered[i].title),
         },
       };
+
+      console.log(navigationExtras.state);
       this.router.navigate(["topics"], navigationExtras);
+      this.cardsFiltered[i].isHidden = !this.cardsFiltered[i].isHidden;
+
     } else {
       this.cardsFiltered[i].isHidden = !this.cardsFiltered[i].isHidden;
     }

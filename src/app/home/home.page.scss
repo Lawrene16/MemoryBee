@@ -1,4 +1,45 @@
-ion-searchbar{
+
+
+.cardImage_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cardImage {
+  width: 92%;
+  margin-top: 15px;
+  object-fit: cover;
+  border-radius: 15px;
+  // margin-left: 4%;
+  height: 130px;
+  position: relative;
+}
+
+.circular_overlay {
+  width: 92%;
+  height: 130px;
+  position: absolute;
+  top: 15px;
+  left: 4%;
+  margin:0 auto;
+  overflow: hidden;
+}
+
+.circular_overlay::after {
+  content:'';
+  position:absolute;
+  left: 35%; top: 8%;
+  border-radius: 100%;
+  width: 110px; height: 110px;
+  box-shadow: 0px 0px 0px 2000px rgba(white, 0.7);
+
+
+}
+
+
+
+ion-searchbar {
   z-index: 50;
   --background: #ffffff;
 }
@@ -20,7 +61,7 @@ ion-content {
   margin-left: 15px;
 }
 
-.subjectCard{
+.subjectCard {
   border-radius: 20px;
   margin-bottom: 0px !important;
   background-color: #474747;
@@ -63,14 +104,6 @@ ion-content {
   margin-left: 15px;
 }
 
-.cardImage {
-  width: 92%;
-  margin-top: 15px;
-  object-fit: cover;
-  border-radius: 15px;
-  margin-left: 4%;
-  height: 130px;
-}
 
 .goButton {
   height: 33px;
