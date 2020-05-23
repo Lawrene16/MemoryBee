@@ -6040,17 +6040,18 @@ export class TopicsPage implements OnInit {
 
 
 
-      let tinderQuestionElement = document.getElementById("questionsCard");
-      let hammer = new Hammer(tinderQuestionElement);
+    // THis is meant to be the logic for viewing questions card in full screen
+      // let tinderQuestionElement = document.getElementById("questionsCard");
+      // let hammer = new Hammer(tinderQuestionElement);
       
-      hammer.add( new Hammer.Pan({ direction: Hammer.DIRECTION_ALL, threshold: 0 }) );
+      // hammer.add( new Hammer.Pan({ direction: Hammer.DIRECTION_ALL, threshold: 0 }) );
 
-      // tie in the handler that will be called
-      hammer.on("pan", (ev) =>{
-        if(ev.target.id == "questionsTitle"){
-        this.handleDrag(ev, tinderQuestionElement)
-        }
-      });
+      // // tie in the handler that will be called
+      // hammer.on("pan", (ev) =>{
+      //   if(ev.target.id == "questionsTitle"){
+      //   this.handleDrag(ev, tinderQuestionElement)
+      //   }
+      // });
   }
 
   handleDrag(ev, element) {
@@ -6082,6 +6083,7 @@ export class TopicsPage implements OnInit {
   }
 }
 
+// Fetches all questions based on their subject and topic
   getQuestions(jsonData, subject, topic) {
     var questionsArray = [];
     jsonData.forEach((element) => {
@@ -6103,6 +6105,7 @@ export class TopicsPage implements OnInit {
     return uniqueQuestionsArray;
   }
 
+  // Fetched all decks based on their subject and topic
   getDecks(jsonData, subject, topic) {
     var decksArray = [];
 
@@ -6122,6 +6125,8 @@ export class TopicsPage implements OnInit {
     var uniqueDecksArray = decksArray.filter((elem, index, self) => {
       return index === self.indexOf(elem);
     });
+
+    // console.log(uniqueDecksArray);
 
     return uniqueDecksArray;
   }

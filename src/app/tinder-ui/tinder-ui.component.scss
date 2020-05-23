@@ -65,8 +65,18 @@
     cursor: grabbing;
 }
 
-ion-segment-button{
-    --color-checked: #ffffff;
-    --indicator-height: 35px;
-    --indicator-color: linear-gradient(0deg, #48CDEA -25%, #57D7F3 125%);
+// ion-segment-button{
+
+// }
+
+ion-segment-button {
+    height: 20px;
+    min-height: 20px;
+        --color-checked: #ffffff;
+        --indicator-height: 20px;
+        --indicator-color: linear-gradient(0deg, #48CDEA -25%, #57D7F3 125%);
+}
+
+ion-segment-button.segment-button-checked {
+    // border-bottom: 2px solid;
 }
