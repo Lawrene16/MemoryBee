@@ -1,0 +1,22 @@
+.pageBackground{
+        background-image: url('../../assets/Vector.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 100%;
+        height: 100%;
+}
+
+ion-content {
+        --overflow: hidden;
+}
+
+#questionsCard{
+        // height: 37%;
+        border-radius: 5px;
+        overflow:auto;
+        width: 92vw;
+        margin: 15px;
+        position: absolute;
+        bottom: 6vh;
+}
+

@@ -8,20 +8,21 @@
     placeholder="Search subjects here...">
   </ion-searchbar>
 
-  <ion-card [id]="i" *ngFor="let card of cardsFiltered; let i = index" (click)="showCardFooter(i)" padding="none"
+  <ion-card [id]="i" *ngFor="let card of cardsFiltered; let i = index" (click)="showCardFooter(i, $event)" padding="none"
     class="subjectCard"
     padding="none">
 
     <div>
           <div style="border-radius:20px; padding-bottom: 8px; background-color: #ffffff;">
             <img class="cardImage" src="{{card.img}}"><br>
+
             <div style="width: 100vw; height: 10px;"></div>
 
             <span class="cardTitle">{{card.title}}</span><br>
             <span class="cardLastReview">Last Review April 09, 2020</span><br>
             <div style="width: 100vw; height: 15px;"></div>
 
-            <div [hidden]="!card.isExpanded">
+            <div [hidden]="card.isHidden">
               <span class="cardDescription2">Lorem Ipsum is simply dummy text of the printing and
                 bla</span><br>
               <span class="cardDescription">Lorem Ipsum is simply dummy text of the printing and
@@ -42,7 +43,7 @@
             <ion-progress-bar class="progress" color="success" [value]="card.progress/100"></ion-progress-bar>
             <div style="width: 100vw; height: 5px;"></div>
 
-            <div class="cardFooter" [hidden]="!card.isExpanded">
+            <div class="cardFooter" [hidden]="card.isHidden">
               <div style="height: 1px; width: 100%; margin-bottom: 5px; background-color: black; opacity: 0.1;">
               </div>
               <p style="margin: 0px;" align="center">
@@ -52,8 +53,9 @@
               </p>
             </div>
           </div>
+          
 
-          <div [hidden]="!card.isExpanded" style="background-color: #474747; color: #ffffff; height: 30%; width: 100%;">
+          <div [hidden]="card.isHidden" style="background-color: #474747; color: #ffffff; height: 30%; width: 100%;">
             <div style="width: 100vw; height: 15px;"></div>
 
             <ion-row style="padding-left: 10px; padding-right: 10px;">
@@ -108,101 +110,13 @@
           </div>
     </div>
 
-
   </ion-card>
 
-  <!-- <ion-card (click)="showCardFooter()" padding="none" class="subjectCard" padding="none">
-
-  <div style="border-radius:20px; padding-bottom: 8px; background-color: #ffffff;">
-    <img class="cardImage" src="https://placeimg.com/300/300/people"><br>
-    <div style="width: 100vw; height: 10px;"></div>
-
-    <span class="cardTitle">PSHYCOLOGY</span><br>
-    <span class="cardLastReview">Last Review April 09, 2020</span><br>
-    <div style="width: 100vw; height: 15px;"></div>
-
-    <div style="margin-bottom: 5px;">
-      <span style="padding-left: 15px; font-size: 12px;">SUBJECT MASTERY</span>
-      <span style="padding-right: 30px; font-weight: 400; font-size: 12px; float: right;">60%</span>
-    </div>
-    <div style="width: 100vw; height: 5px;"></div>
-
-    <ion-progress-bar class="progress" color="success" [value]="0.6"></ion-progress-bar>
-    <div style="width: 100vw; height: 5px;"></div>
-
-
-    <div class="cardFooter" *ngIf="showCardFooterBool">
-      <div style="height: 1px; width: 100%; margin-bottom: 5px; background-color: black; opacity: 0.1;">
-      </div>
-      <p style="margin: 0px;" align="center">
-        <ion-button expand="round" class="goButton">
-          <span style="font-size: 16px;">GO</span>
-        </ion-button>
-      </p>
-    </div>
-  </div>
-
-  <div *ngIf="showCardFooterBool" style="background-color: #474747; color: #ffffff; height: 30%; width: 100%;">
-    <div style="width: 100vw; height: 15px;"></div>
-
-    <ion-row style="padding-left: 10px; padding-right: 10px;">
-      <ion-col size="3.7">
-        <span class="tableHeaders">TOPICS</span>
-        <ion-icon style="font-size: 7px;  padding-left: 5px;" name="arrow-down"></ion-icon>
-      </ion-col>
-
-      <ion-col size="3">
-        <span class="tableHeaders">HALF LIFE</span>
-        <ion-icon style="font-size: 7px;  padding-left: 5px;" name="arrow-down"></ion-icon>
-      </ion-col>
-
-      <ion-col size="3">
-        <span class="tableHeaders">PROGRESS</span>
-        <ion-icon style="font-size: 7px;  padding-left: 5px;" name="arrow-down"></ion-icon>
-      </ion-col>
-
-      <ion-col size="2.3" style="padding-top: 5px; padding-left: 0px; padding-right: 0px;">
-        <span class="tableHeaders">MASTERY</span>
-        <ion-icon style="font-size: 7px;  padding-left: 5px;" name="arrow-down"></ion-icon>
-      </ion-col>
-    </ion-row>
-
-    <div style="height: 1px; width: 91%; margin-left: 15px; background-color: white; opacity: 0.6;"></div>
-
-    <div>
-      <ion-row style="padding-left: 10px; padding-right: 10px;">
-        <ion-col size="3.5">
-          <span class="tableTexts">Test topic</span>
-        </ion-col>
-
-        <ion-col size="3">
-          <span class="tableTexts">May 1, 2020</span>
-        </ion-col>
-
-        <ion-col size="3">
-          <span class="tableTexts" style="padding-left: 15px;">65/100</span>
-        </ion-col>
-
-        <ion-col style="padding-top: 5px; padding-left: 0px; padding-right: 0px;" size="2.5">
-          <span class="tableTexts" style="padding-left: 15px;">50%</span>
-        </ion-col>
-      </ion-row>
-
-      <div style="height: 1px; width: 91%; margin-left: 15px; background-color: white; opacity: 0.5;"></div>
-
-    </div>
-
-    <div style="width: 100vw; height: 10px;"></div>
-
-  </div>
-
-</ion-card> -->
-  <!-- <app-tinder-ui [cards]="cardsFiltered" (choiceMade)="logChoice($event)"></app-tinder-ui> -->
-
-
-  <!-- <div *ngIf="showAddButton" id="addicondiv">
-    <img src="../../assets/icon/add -icon.png">
-  </div> -->
+      <ion-fab *ngIf="fabShow" (click)="scrollToTop()" vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button>
+          <ion-icon name="arrow-up-circle"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
 
   <div style="width: 100vw; height: 50px;"></div>
 

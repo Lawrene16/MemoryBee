@@ -2,28 +2,26 @@ import { Component, ViewChild } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 
 import { IonContent } from "@ionic/angular";
-declare var ProgressBar: any;
 // import { trigger, style, animate, transition } from '@angular/animations';
+// import {
+//   trigger,
+//   state,
+//   style,
+//   animate,
+//   transition,
+// } from "@angular/animations";
 
+import { Router, NavigationExtras } from "@angular/router";
 
 @Component({
   selector: "app-home",
-  // animations: [
-  //   trigger("enterAnimation", [
-  //     transition(":enter", [
-  //       style({ transform: "translateX(100%)", opacity: 0 }),
-  //       animate("500ms", style({ transform: "translateX(0)", opacity: 1 })),
-  //     ]),
-  //     transition(":leave", [
-  //       style({ transform: "translateX(0)", opacity: 1 }),
-  //       animate("500ms", style({ transform: "translateX(100%)", opacity: 0 })),
-  //     ]),
-  //   ]),
-  // ],
   templateUrl: "home.page.html",
   styleUrls: ["home.page.scss"],
 })
 export class HomePage {
+  visibility: string = "hidden";
+  fabShow: boolean = false;
+  // Note i added a lot of fake topics and subjects that may be duplicates later
   res = [
     {
       Subject: "RPCGA Licensure",
@@ -5929,6 +5927,78 @@ export class HomePage {
       Answer:
         "The conclusion of the Lord's prayer (which is, For thine is the kingdom, and the power, and the glory, forever. Amen.),1 teaches us to enforce our petitions with arguments,2 which are to be taken, not from any worthiness in ourselves, or in any other creature, but from God;3 and with our prayers to join praises,4 ascribing to God alone eternal sovereignty, omnipotency, and glorious excellency;5 in regard whereof, as he is able and willing to help us,6 so we by faith are emboldened to plead with him that he would,7 and quietly to rely upon him, that he will fulfil our requests.8 And, to testify this our desire and assurance, we say, Amen.9<br><br>1: Matthew 6:13<br>2: Romans 15:30<br>3: Daniel 9:4, Daniel 9:7-9, Daniel 9:16-19<br>4: Philippians 4:6<br>5: 1 Chronicles 29:10-13<br>6: Ephesians 3:20-21 , Luke 11:13<br>7: 2 Chronicles 20:6, 2 Chronicles 20:11<br>8: 2 Chronicles 14:11<br>9: 1 Corinthians 14:16 , Revelation 22:20-21",
     },
+    {
+      Subject: "Test Subject 1",
+      Topic: "Test topic 1",
+      Deck: "Christ",
+      Question: "Define the essential character of Christ.",
+      Answer: "holy, harmless, undefiled and entirely separate from sinners",
+    },
+    {
+      Subject: "Test Subject 1",
+      Topic: "Test topic 2",
+      Deck: "Christ",
+      Question: "Define the essential character of Christ.",
+      Answer: "holy, harmless, undefiled and entirely separate from sinners",
+    },
+    {
+      Subject: "Test Subject 1",
+      Topic: "Test topic 3",
+      Deck: "Christ",
+      Question: "Define the essential character of Christ.",
+      Answer: "holy, harmless, undefiled and entirely separate from sinners",
+    },
+    {
+      Subject: "Test Subject 1",
+      Topic: "Test topic 4",
+      Deck: "Christ",
+      Question: "Define the essential character of Christ.",
+      Answer: "holy, harmless, undefiled and entirely separate from sinners",
+    },
+
+    {
+      Subject: "Test Subject 2",
+      Topic: "Test topic 1",
+      Deck: "Christ",
+      Question: "Define the essential character of Christ.",
+      Answer: "holy, harmless, undefiled and entirely separate from sinners",
+    },
+    {
+      Subject: "Test Subject 2",
+      Topic: "Test topic 2",
+      Deck: "Christ",
+      Question: "Define the essential character of Christ.",
+      Answer: "holy, harmless, undefiled and entirely separate from sinners",
+    },
+    {
+      Subject: "Test Subject 2",
+      Topic: "Test topic 3",
+      Deck: "Christ",
+      Question: "Define the essential character of Christ.",
+      Answer: "holy, harmless, undefiled and entirely separate from sinners",
+    },
+    {
+      Subject: "Test Subject 2",
+      Topic: "Test topic 4",
+      Deck: "Christ",
+      Question: "Define the essential character of Christ.",
+      Answer: "holy, harmless, undefiled and entirely separate from sinners",
+    },
+
+    {
+      Subject: "Test Subject 3",
+      Topic: "Test topic 1",
+      Deck: "Christ",
+      Question: "Define the essential character of Christ.",
+      Answer: "holy, harmless, undefiled and entirely separate from sinners",
+    },
+    {
+      Subject: "Test Subject 3",
+      Topic: "Test topic 2",
+      Deck: "Christ",
+      Question: "Define the essential character of Christ.",
+      Answer: "holy, harmless, undefiled and entirely separate from sinners",
+    },
   ];
   cards: Array<{
     img: string;
@@ -5936,14 +6006,10 @@ export class HomePage {
     description: string;
     progress: number;
     topics: Array<string>;
-    isExpanded: boolean;
+    isHidden: boolean;
   }> = [];
   @ViewChild(IonContent, { static: false }) content: IonContent;
   cardsFiltered: any = [];
-
-  win: Window = window;
-
-  bar: any;
   jsonData = [];
   subjects = [];
   showCardFooterBool = false;
@@ -5952,12 +6018,22 @@ export class HomePage {
     "https://placeimg.com/300/300/animals",
     "https://placeimg.com/300/300/nature",
     "https://placeimg.com/300/300/tech",
+    "https://placeimg.com/300/300/people",
+    "https://placeimg.com/300/300/animals",
+    "https://placeimg.com/300/300/nature",
+    "https://placeimg.com/300/300/tech",
   ];
 
-  constructor(public httpClient: HttpClient) {
+  constructor(public httpClient: HttpClient, public router: Router) {
     setTimeout(() => {
       this.extractData();
     }, 300);
+  }
+
+  scrollToTop() {
+    this.content.scrollToTop(700).then(() => {
+      this.fabShow = false;
+    });
   }
 
   logScrollStart(event) {
@@ -5965,12 +6041,15 @@ export class HomePage {
   }
 
   logScrolling(event) {
-    // console.log("logScrolling : When Scrolling", event);
+    if (event.detail.scrollTop == 0) {
+      this.fabShow = false;
+    } else if (event.detail.deltaY > 50) {
+      this.fabShow = true;
+    } else {
+    }
   }
 
-  logScrollEnd(event) {
-    // console.log("logScrollEnd : When Scroll Ends", event);
-  }
+  logScrollEnd(event) {}
 
   private extractData() {
     this.res.forEach((element) => {
@@ -5981,31 +6060,68 @@ export class HomePage {
 
     for (var i = 0; i < this.subjects.length; i++) {
       this.cards.push({
-        img: this.images[i],
+        img: "../../assets/cat.jpg",
         title: this.subjects[i],
         description: "djfksdjhfksdfsdf",
-        progress: 100 - i * 20,
+        progress: 90 - i * 10,
         topics: this.getTopics(this.res, this.subjects[i]),
-        isExpanded: false,
+        isHidden: true,
+        // questions
       });
     }
+
+    // console.log(this.getTopics(this.res, "RPCGA Licensure"));
+    // console.log(
+    //   this.getQuestions(
+    //     this.res,
+    //     "RPCGA Licensure",
+    //     this.getTopics(this.res, "RPCGA Licensure")[0]
+    //   )
+    // );
 
     this.cardsFiltered = this.cards;
   }
 
-  showCardFooter(i) {
+  getQuestions(jsonData, subject, topic) {
+    var questionsArray = [];
+
+    jsonData.forEach((element) => {
+      if (element.Subject == subject && element.Topic == topic) {
+        questionsArray.push({
+          question: element.Question,
+          answer: element.Answer,
+        });
+      }
+    });
+
+    // Clears duplicates
+    var uniqueQuestionsArray = questionsArray.filter((elem, index, self) => {
+      return index === self.indexOf(elem);
+    });
+
+    return uniqueQuestionsArray;
+  }
+
+  showCardFooter(i, event) {
     var titleELe = document.getElementById(i);
+    this.content.scrollToPoint(0, titleELe.offsetTop - 20, 1000);
 
-    if (this.cardsFiltered[i].isExpanded) {
-    this.content.scrollToPoint(0, titleELe.offsetTop, 1000);
-      
+    if (
+      event.target.localName == "ion-button" ||
+      event.target.innerHTML == "GO"
+    ) {
+      let navigationExtras: NavigationExtras = {
+        state: {
+          subject: this.cardsFiltered[i].title,
+          topics: this.getTopics(this.res, this.cardsFiltered[i].title),
+          res: this.res,
+          // questions: this.getQuestions(this.res, this.cardsFiltered[i].title),
+        },
+      };
+      this.router.navigate(["topics"], navigationExtras);
+    } else {
+      this.cardsFiltered[i].isHidden = !this.cardsFiltered[i].isHidden;
     }
-    else {
-    this.content.scrollToPoint(0, titleELe.offsetTop, 1000);
-      
-    }
-    this.cardsFiltered[i].isExpanded = !this.cardsFiltered[i].isExpanded;
-
   }
 
   getTopics(jsonData, subject) {
@@ -6039,11 +6155,5 @@ export class HomePage {
     }
   }
 
-  logChoice(event) {
-    // if (this.choiceMadeEventCount == 0) {
-    //   this.choiceMadeEventCount++;
-    //   // console.log(event);
-    // }
-    // this.choiceMadeEventCount = 0;
-  }
+  logChoice(event) {}
 }

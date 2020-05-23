@@ -9,7 +9,6 @@ import {
   EventEmitter,
 } from "@angular/core";
 
-declare var ProgressBar: any;
 
 @Component({
   selector: "app-tinder-ui",
@@ -18,14 +17,19 @@ declare var ProgressBar: any;
 })
 export class TinderUiComponent {
   @Output() choiceMade = new EventEmitter();
+
   @Input("cards") cards: Array<{
-    img: string;
     title: string;
     description: string;
-    progress: number;
-    topics: Array<string>
+    decks: any;
+    isContentHidden: any;
+    cardHeight;
+    deckIsChecked:any;
   }>;
-  cardOpacity
+
+  currentCard;
+
+  cardOpacity;
   bar: any;
   @ViewChildren("tinderCard") tinderCards: QueryList<ElementRef>;
   tinderCardsArray: Array<ElementRef>;
@@ -36,7 +40,11 @@ export class TinderUiComponent {
   heartVisible: boolean;
   crossVisible: boolean;
 
-  test = 50;
+  testdeck = ["", "", "", "", ""];
+
+  // test = 50;
+  buttonValue = "study";
+  hideStudyProgress;
 
   constructor(private renderer: Renderer2) {
     setTimeout(() => {
@@ -50,6 +58,8 @@ export class TinderUiComponent {
         } else if (ev.type == "panend") {
         }
       });
+
+      // var checkBox = document.getElementById("myCheck");
     }, 300);
   }
 
@@ -77,93 +87,6 @@ export class TinderUiComponent {
     this.transitionInProgress = true;
   }
 
-  handlePan(event) {
-    // console.log("event")
-    if (
-      event.deltaX === 0 ||
-      (event.center.x === 0 && event.center.y === 0) ||
-      !this.cards.length
-    )
-      return;
-
-    if (this.transitionInProgress) {
-      this.handleShift();
-    }
-
-    this.renderer.addClass(this.tinderCardsArray[0].nativeElement, "moving");
-
-    if (event.deltaX > 0) {
-      this.toggleChoiceIndicator(false, true);
-    }
-    if (event.deltaX < 0) {
-      this.toggleChoiceIndicator(true, false);
-    }
-
-    let xMulti = event.deltaX * 0.03;
-    let yMulti = event.deltaY / 80;
-    let rotate = xMulti * yMulti;
-
-    this.renderer.setStyle(
-      this.tinderCardsArray[0].nativeElement,
-      "transform",
-      "translate(" +
-        event.deltaX +
-        "px, " +
-        event.deltaY +
-        "px) rotate(" +
-        rotate +
-        "deg)"
-    );
-
-    this.shiftRequired = true;
-  }
-
-  handlePanEnd(event) {
-    this.toggleChoiceIndicator(false, false);
-
-    if (!this.cards.length) return;
-
-    this.renderer.removeClass(this.tinderCardsArray[0].nativeElement, "moving");
-
-    let keep = Math.abs(event.deltaX) < 80 || Math.abs(event.velocityX) < 0.5;
-    if (keep) {
-      this.renderer.setStyle(
-        this.tinderCardsArray[0].nativeElement,
-        "transform",
-        ""
-      );
-      this.shiftRequired = false;
-    } else {
-      let endX = Math.max(
-        Math.abs(event.velocityX) * this.moveOutWidth,
-        this.moveOutWidth
-      );
-      let toX = event.deltaX > 0 ? endX : -endX;
-      let endY = Math.abs(event.velocityY) * this.moveOutWidth;
-      let toY = event.deltaY > 0 ? endY : -endY;
-      let xMulti = event.deltaX * 0.03;
-      let yMulti = event.deltaY / 80;
-      let rotate = xMulti * yMulti;
-
-      this.renderer.setStyle(
-        this.tinderCardsArray[0].nativeElement,
-        "transform",
-        "translate(" +
-          toX +
-          "px, " +
-          (toY + event.deltaY) +
-          "px) rotate(" +
-          rotate +
-          "deg)"
-      );
-
-      this.shiftRequired = true;
-
-      this.emitChoice(!!(event.deltaX > 0), this.cards[0]);
-    }
-    this.transitionInProgress = true;
-  }
-
   toggleChoiceIndicator(cross, heart) {
     this.crossVisible = cross;
     this.heartVisible = heart;
@@ -174,10 +97,11 @@ export class TinderUiComponent {
     this.toggleChoiceIndicator(false, false);
     if (this.shiftRequired) {
       this.shiftRequired = false;
-      this.cards.shift();
-    }
 
-    console.log("shift handlee")
+      // this.currentCard = this.cards[0];
+      this.cards.shift();
+      // this.cards.push(this.currentCard);
+    }
   }
 
   emitChoice(heart, card) {
