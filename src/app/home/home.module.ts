@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
-import { TinderUiComponent } from '../tinder-ui/tinder-ui.component';
 
 
 @NgModule({
@@ -15,6 +14,6 @@ import { TinderUiComponent } from '../tinder-ui/tinder-ui.component';
     IonicModule,
     HomePageRoutingModule
   ],
-  declarations: [HomePage, TinderUiComponent]
+  declarations: [HomePage]
 })
 export class HomePageModule {}
