@@ -2,7 +2,7 @@
 
   <div id="tindercards" class="tinder--cards">
 
-    <div #tinderCard class="tinder--card" (pan)="handlePan($event)" (panend)="handlePanEnd($event)"
+    <div #tinderCard class="tinder--card"
       (transitionend)="handleShift()" *ngFor="let card of cards; let i = index"
       [ngStyle]="{ zIndex: cards.length - i, opacity: card.opacity, height: card.cardHeight, transform: 'scale(' + (21 - i) / 21 + ') translateY(-' + 21 * i + 'px)' }">
 
@@ -10,11 +10,9 @@
 
       <div [hidden]="card.isContentHidden">
 
-
-        <div style="font-size: 10px; margin-top: 5px; max-lines: 3; margin-left: 10px;">Lorem ipsum dolor lorem ipsum
+        <div style="font-size: 11px; margin-top: 5px; max-lines: 3; margin-left: 10px;">Lorem ipsum dolor lorem ipsum
           dolor lorem ipsum
-          dolor lorem ipsum dolor lorem psum dolor lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor lorem ipsum
-          dolor
+          dolor lorem ipsum dolor lorem psum dolor lorem ipsum dolor lorem ipsum dolor 
           <span style="font-weight: 400; color: #3F96C2; font-size: 11px;">Show more <ion-icon name="add"></ion-icon>
           </span>
         </div>
@@ -24,19 +22,19 @@
             <ion-col style="padding: 0px;" size="2.5">
               <div style="height: 1px; opacity: 0.3; width: auto; margin-top: 11.5px; background-color: black;"></div>
             </ion-col>
-            
+
             <ion-col size="7" style="padding: 0px;">
-           <p align="center" style="margin: 0px;">
-             <ion-segment style="width: auto;" [(ngModel)]="buttonValue" mode="ios"
-               (ionChange)="segmentChanged($event)">
-               <ion-segment-button value="study">
-                 <div style="font-size: 10px; font-weight: 100;">Study Progress</div>
-               </ion-segment-button>
-               <ion-segment-button value="test">
-                 <div style="font-size: 10px; font-weight: 100">Testing Progress</div>
-               </ion-segment-button>
-             </ion-segment>
-           </p>
+              <p align="center" style="margin: 0px;">
+                <ion-segment style="width: auto;" [(ngModel)]="buttonValue" mode="ios"
+                  (ionChange)="segmentChanged($event)">
+                  <ion-segment-button value="study">
+                    <div style="font-size: 11px; font-weight: 300;">Study Progress</div>
+                  </ion-segment-button>
+                  <ion-segment-button value="test">
+                    <div style="font-size: 11px; font-weight: 300">Testing Progress</div>
+                  </ion-segment-button>
+                </ion-segment>
+              </p>
             </ion-col>
             <ion-col style="padding: 0px;" size="2.5">
               <div style="height: 1px; opacity: 0.3; width: auto; margin-top: 11.5px; background-color: black;"></div>
@@ -45,95 +43,87 @@
         </div>
 
 
-        <div style="padding-left: 10px; margin-top: 10px; width: 100%; overflow-y:auto;">
+        <div style="padding-left: 10px; height: 20vh; padding-bottom: 8px; margin-top: 10px; width: 100%; overflow:auto;">
 
-          <div [hidden]="hideStudyProgress">
-                      <ion-row>
-                        <ion-col style="font-size: 8px; opacity: 0.7;" size="3">DECKS</ion-col>
-                        <ion-col style="font-size: 8px;  opacity: 0.7; padding-left: 0px;" size="9">TESTING DATES
-                        </ion-col>
-                      </ion-row>
+          <div [hidden]="hideStudyProgress" style="overflow: auto;">
+            <ion-row>
+              <ion-col style="font-size: 10px; opacity: 0.7;" size="2.8">DECKS</ion-col>
+              <ion-col style="font-size: 10px;  opacity: 0.7; padding-left: 0px;" size="6.5">TESTING DATES
+              </ion-col>
+            </ion-row>
 
-                      <ion-row style="margin-top: 5px;" *ngFor="let deck of testdeck">
-                        <ion-col size="3" style="font-size: 10px; padding: 0px; opacity: 0.7;">
-                          <div style="width: 100%; height: 13px;">
-                            <div style="width: 20%; float: left;">
-                              <!-- <input type="checkbox" id="myCheck" onclick="myFunction()"> -->
-                              <!-- <img [hidden]="!deckIsChecked" height="10px" src="../../assets/check.png">
-                              <img [hidden]="deckIsChecked" height="10px" src="../../assets/uncheck.png"> -->
+            <ion-row style="margin-top: 5px;" *ngFor="let deck of card.decks; let j = index">
+              <ion-col size="2.5" style="font-size: 11px; padding: 0px; opacity: 0.7;">
+                <div style="width: 100%; height: 13px;">
+                  <div (click)="setDeckChecked(i, j)" style="width: 30%; float: left;">
 
-                                                            <img height="10px"
-                                                              src="../../assets/check.png">
-                                                            <!-- <img [hidden]="deckIsChecked" height="10px"
-                                                              src="../../assets/uncheck.png"> -->
+                    <ion-checkbox checked="true" mode="md"></ion-checkbox>
+                    <!-- <img height="15px" [hidden]="!deck.isChecked" src="../../assets/check.png">
+                    <img height="15px" [hidden]="deck.isChecked" src="../../assets/uncheck.png"> -->
 
+                  </div>
+                  <div style="width: 70%; padding-top: 2px; float: left;">
+                    <span style="font-size: 11px;">{{deck.title}}</span>
+                  </div>
+                </div>
+              </ion-col>
 
-                            </div>
-                            <div style="width: 80%; float: left;">
-                              <span style="font-size: 10px; margin-left: 5px; margin-bottom: 10px;">All Decks</span>
-                            </div>
-                          </div>
-                        </ion-col>
-
-                        <ion-col size="2.2" style="font-size: 10px;  padding: 0px;  opacity: 0.7;">
-                          15th March
-                        </ion-col>
-                        <ion-col size="2.2" style="font-size: 10px;  padding: 0px;  opacity: 0.7;">
-                          18th March
-                        </ion-col>
-                        <ion-col size="2.2" style="font-size: 10px;  padding: 0px;  opacity: 0.7;">
-                          12th March
-                        </ion-col>
-                        <ion-col size="2.2" style="font-size: 10px;  padding: 0px;  opacity: 0.7;">
-                          15th March
-                        </ion-col>
-                      </ion-row>
+              <ion-col size="2.3" style="font-size: 11px;  padding: 0px; padding-top: 2px;  opacity: 0.7;">
+               <span style="float: right;"> 15th March</span>
+              </ion-col>
+              <ion-col size="2.3" style="font-size: 11px;  padding: 0px; padding-top: 2px;  opacity: 0.7;">
+                <span style="float: right;"> 18th March</span>
+              </ion-col>
+              <ion-col size="2.3" style="font-size: 11px;  padding: 0px; padding-top: 2px;  opacity: 0.7;">
+                <span style="float: right;"> 12th March</span>
+              </ion-col>
+                <ion-col size="2.3" style="font-size: 11px;  padding: 0px; padding-top: 2px;  opacity: 0.7;">
+                  <span style="float: right;"> 12th March</span>
+                </ion-col>
+            </ion-row>
           </div>
 
-          
-                    <div [hidden]="!hideStudyProgress">
-                      <ion-row>
-                        <ion-col style="font-size: 8px; opacity: 0.7;" size="3">DECKS</ion-col>
-                        <ion-col style="font-size: 8px; opacity: 0.7;" size="3">CARDS REVIEWED</ion-col>
-                        <ion-col style="font-size: 8px; opacity: 0.7;" size="3">PERFORMANCE</ion-col>
-                        <ion-col style="font-size: 8px; opacity: 0.7;" size="3">HALF LIFE</ion-col>
 
-                        <!-- <ion-col style="font-size: 9px;  opacity: 0.7; padding-left: 0px;" size="9">TESTING DATES</ion-col> -->
-                      </ion-row>
+          <div [hidden]="!hideStudyProgress">
+            <ion-row>
+              <ion-col style="font-size: 10px; opacity: 0.7;" size="4">DECKS</ion-col>
+              <ion-col style="font-size: 10px; opacity: 0.7;" size="2">REVIEWED</ion-col>
+              <ion-col style="font-size: 10px; opacity: 0.7;" size="3">PERFORMANCE</ion-col>
+              <ion-col style="font-size: 10px; opacity: 0.7;" size="3">HALF LIFE</ion-col>
 
-                      <ion-row style="margin-top: 5px;" *ngFor="let deck of testdeck">
-                        <ion-col size="3" style="font-size: 10px; padding: 0px; opacity: 0.7;">
-                          <div style="width: 100%; height: 13px;">
-                            <div style="width: 20%; float: left;">
-                              <!-- <input type="checkbox" id="myCheck" onclick="myFunction()"> -->
-                              <!-- <img [hidden]="!deckIsChecked" height="10px" src="../../assets/check.png">
-                              <img [hidden]="deckIsChecked" height="10px" src="../../assets/uncheck.png"> -->
+              <!-- <ion-col style="font-size: 9px;  opacity: 0.7; padding-left: 0px;" size="9">TESTING DATES</ion-col> -->
+            </ion-row>
 
-                              <img height="10px" src="../../assets/check.png">
-                              <!-- <img [hidden]="deckIsChecked" height="10px"
-                                                              src="../../assets/uncheck.png"> -->
+            <ion-row style="margin-top: 5px;" *ngFor="let deck of card.decks;  let j = index">
+              <ion-col size="4" style="font-size: 10px; padding: 0px; opacity: 0.7;">
+                <div style="width: 100%; height: 13px;">
+                  <div (click)="setDeckChecked(i, j)" style="width: 25%; float: left;">
 
+                                          <!-- <img height="15px" [hidden]="!deck.isChecked" src="../../assets/check.png">
+                                          <img height="15px" [hidden]="deck.isChecked" src="../../assets/uncheck.png"> -->
 
-                            </div>
-                            <div style="width: 80%; float: left;">
-                              <span style="font-size: 10px; margin-left: 5px; margin-bottom: 10px;">All Decks</span>
-                            </div>
-                          </div>
-                        </ion-col>
+                    <ion-checkbox checked="true" mode="md"></ion-checkbox>
 
-                        <ion-col size="3"
-                          style="font-size: 10px;padding-bottom: 0px; padding-left: 20px;   padding-top: 0px;  opacity: 0.7;">
-                          81/100
-                        </ion-col>
-                        <ion-col size="3"
-                          style="font-size: 10px;  padding-bottom: 0px; padding-left: 20px;   padding-top: 0px;  opacity: 0.7;">
-                          90%
-                        </ion-col>
-                        <ion-col size="3" style="font-size: 10px;  padding: 0px;  opacity: 0.7;">
-                          May 02, 2020
-                        </ion-col>
-                      </ion-row>
-                    </div>
+                  </div>
+                  <div style="width: 75%; float: left; padding-top: 2px; ">
+                    <span style="font-size: 11px; margin-bottom: 10px;">{{deck.title}}</span>
+                  </div>
+                </div>
+              </ion-col>
+
+              <ion-col size="2"
+                style="font-size: 11px;padding-bottom: 0px; padding-left: 8px;   padding-top: 2px;  opacity: 0.7;">
+                81/100
+              </ion-col>
+              <ion-col size="3"
+                style="font-size: 11px;  padding-bottom: 0px; padding-left: 22px;   padding-top: 2px;  opacity: 0.7;">
+                90%
+              </ion-col>
+              <ion-col size="3" style="font-size: 11px;  padding: 0px; padding-top: 2px;   opacity: 0.7;">
+                May 02, 2020
+              </ion-col>
+            </ion-row>
+          </div>
 
         </div>
 

@@ -8,6 +8,7 @@ import { TopicsPageRoutingModule } from './topics-routing.module';
 
 import { TopicsPage } from './topics.page';
 import { TinderUiComponent } from "../tinder-ui/tinder-ui.component";
+// import { DragulaModule } from "ng2-dragula";
 
 
 @NgModule({

@@ -36,35 +36,33 @@
 
             </ion-col>
           </ion-row>
-          <div style="height: 0.7px; margin-top: 9px; width: 100%; background-color: black; opacity: 0.1; "></div>
+          <div style="height: 1px; margin-top: 9px; width: 100%; background-color: black; opacity: 0.1; "></div>
         </div>
         
 
         <!-- Each question -->
         <div *ngFor="let question of topicsArray[0].questions; let i = index" style="width: 100%; height: 100%;">
 
-          <!-- Question and arrow -->
-          <div style="width: 100%; height: auto;">
-            <ion-row (click)="hideOrShowAnswer(i)" style="padding: 0px">
-              <ion-col style="padding: 0px;" size="11.3">
-                <span style="font-size: 10px; opacity: 0.7;">{{question.deck}}: </span>
-                <span style="font-size: 11px;">{{question.question}}</span>
+          <div [hidden]="!question.isChecked" style="width: 100%; height: auto;">
+            <ion-row (click)="hideOrShowAnswer(i)"
+              style="padding: 0px; height: auto;">
+              <ion-col style="padding-top: 5px;" size="11.3">
+                <span style="font-size: 12px; opacity: 0.7;">{{question.deck}}: </span>
+                <span style="font-size: 13px;">{{question.question}}</span>
 
                 <div [hidden]="question.hideAnswer" style="margin-top: 5px;">
-                  <span style="font-size: 11px;">{{question.answer}}</span>
+                  <span style="font-size: 13px;">{{question.answer}}</span>
                 </div>
-
 
               </ion-col>
               <ion-col size="0.7">
-                <ion-icon [hidden]="!question.hideAnswer" style="margin-top: 10px;" name="arrow-down"></ion-icon>
-                <ion-icon [hidden]="question.hideAnswer" style="margin-top: 10px;"
+                <ion-icon [hidden]="!question.hideAnswer" style="padding: 0px;" name="arrow-down"></ion-icon>
+                <ion-icon [hidden]="question.hideAnswer" style="padding: 0px;"
                   name="arrow-up"></ion-icon>
 
               </ion-col>
             </ion-row>
-            <!-- Line divider -->
-            <div style="height: 0.7px; margin-top: 5px; width: 100%; background-color: black; opacity: 0.1; ">
+            <div style="height: 1px; margin-top: 5px; width: 100%; background-color: black; opacity: 0.1; ">
             </div>
 
           </div>
@@ -75,9 +73,9 @@
 
     <!-- Buttom buttons -->
     <div style="width: 100%; position: absolute; bottom: 7px;">
-      <ion-button color="warning" style="float: left; margin-left: 15px; height: 30px; width: 80px;" expand="round">
+      <ion-button (click)="testOrStudy(0)" color="warning" style="float: left; margin-left: 15px; height: 30px; width: 80px;" expand="round">
         <span style="font-size: 12px; color: white;">TEST</span></ion-button>
-      <ion-button color="warning" style="float: right; margin-right: 15px; width: 80px; height: 30px;" expand="round">
+      <ion-button (click)="testOrStudy(1)" color="warning" style="float: right; margin-right: 15px; width: 80px; height: 30px;" expand="round">
         <span style="font-size: 12px; color: white;">STUDY</span></ion-button>
     </div>
   </div>

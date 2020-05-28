@@ -31,13 +31,6 @@
     cursor: grab;
 }
 
-
-.lineDivider {
-    height: 0.5px;
-    background-color: black;
-}
-
-
 .tinder--card {
     display: inline-block;
     width: 93vw;
@@ -56,12 +49,4 @@
     cursor: -webkit-grabbing;
     cursor: -moz-grabbing;
     cursor: grabbing;
-}
-
-ion-segment-button {
-    height: 20px;
-    min-height: 20px;
-    --color-checked: #ffffff;
-    --indicator-height: 20px;
-    --indicator-color: linear-gradient(0deg, #48CDEA -25%, #57D7F3 125%);
 }

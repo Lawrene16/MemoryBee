@@ -8,40 +8,22 @@ import {
   Output,
   EventEmitter,
 } from "@angular/core";
-// import { DragulaService } from 'ng2-dragula'
-// import interact from "interactjs";
 
 @Component({
-  selector: "app-tinder-ui",
-  templateUrl: "./tinder-ui.component.html",
-  styleUrls: ["./tinder-ui.component.scss"],
+  selector: "app-answers-ui",
+  templateUrl: "./answers-ui.component.html",
+  styleUrls: ["./answers-ui.component.scss"],
 })
-export class TinderUiComponent {
+export class AnswersUiComponent {
   @Output() choiceMade = new EventEmitter();
 
   @Input("cards") cards: Array<{
     title: string;
-    description: string;
-    decks: any;
     isContentHidden: any;
     cardHeight;
-    questions: any;
     opacity: any;
-    deckIsChecked: any;
   }>;
 
-  cardsFiltered: Array<{
-    title: string;
-    description: string;
-    decks: any;
-    isContentHidden: any;
-    cardHeight;
-    questions: any;
-    opacity: any;
-    deckIsChecked: any;
-  }>;
-
-  bar: any;
   @ViewChildren("tinderCard") tinderCards: QueryList<ElementRef>;
   tinderCardsArray: Array<ElementRef>;
 
@@ -51,40 +33,22 @@ export class TinderUiComponent {
   heartVisible: boolean;
   crossVisible: boolean;
 
-  // test = 50;
-  buttonValue = "study";
-  hideStudyProgress = false;
-
-  constructor(private renderer: Renderer2,
-    // public dragula: DragulaService
-  ) {
+  constructor(private renderer: Renderer2) // public dragula: DragulaService
+  {
     setTimeout(() => {
-      this.cardsFiltered = this.cards;
-      this.cards = [];
-      for (var i = 0; i < this.cardsFiltered.length; i++) {
-        if (i < 3) {
-          console.log(i);
-          this.cards.push(this.cardsFiltered[i]);
-        }
-        this.changeOpacity();
-      }
 
+      this.changeOpacity();
       let tinderCardElement = document.getElementById("tindercards");
       let hamming = new Hammer(tinderCardElement);
       hamming.on("panleft panright tap press pressup panend", (ev) => {
         if (ev.type == "panend") {
           this.handlePanEnd(ev);
         } else if (ev.type == "panright") {
-          if (this.cardsFiltered.length > 2) {
+          if (this.cards.length > 2) {
             this.handlePan(ev);
           }
         } else if (ev.type == "panleft") {
-          if (this.cardsFiltered.length > 2) {
-            // this.cards[0] = this.cardsFiltered[this.cardsFiltered.length-1]
-                // this.cardsFiltered.push(this.cards[0]);
-                // this.cardsFiltered.shift();
-                // this.cards.shift();
-                // this.cards.push(this.cardsFiltered[this.cards.length]);
+          if (this.cards.length > 2) {
           }
         }
       });
@@ -218,19 +182,9 @@ export class TinderUiComponent {
   }
 
   switchArrayObjects() {
-    this.cardsFiltered.push(this.cards[0]);
-    this.cardsFiltered.shift();
+    this.cards.push(this.cards[0]);
     this.cards.shift();
-    this.cards.push(this.cardsFiltered[this.cards.length]);
-  }
-
-  setDeckChecked(i, j) {
-    this.cards[i].decks[j].isChecked = !this.cards[i].decks[j].isChecked;
-    this.cards[i].questions.forEach((question) => {
-      if (this.cards[i].decks[j].title == question.deck) {
-        question.isChecked = this.cards[i].decks[j].isChecked;
-      }
-    });
+    // this.cards.push(this.cardsFiltered[this.cards.length]);
   }
 
   changeOpacity() {
@@ -266,14 +220,5 @@ export class TinderUiComponent {
     this.tinderCards.changes.subscribe(() => {
       this.tinderCardsArray = this.tinderCards.toArray();
     });
-  }
-
-  segmentChanged(event) {
-    // console.log(event.detail.value);
-    if (event.detail.value == "study") {
-      this.hideStudyProgress = false;
-    } else if (event.detail.value == "test") {
-      this.hideStudyProgress = true;
-    }
   }
 }

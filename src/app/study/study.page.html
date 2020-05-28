@@ -1,0 +1,95 @@
+<ion-content>
+  <!-- Header -->
+  <div style="height: 110px; background: linear-gradient(13.32deg, #3490BF 5.32%, #38C1C7 49.46%, #358DBF 94.68%);">
+    <ion-row style="padding: 0px; margin-bottom: 10px; z-index: 30; color: white; font-size: 15px; padding-top: 15px;">
+      <ion-col size="0.5">
+      </ion-col>
+      <ion-col style="z-index: 9;" size="1" routerLink="/topics" routerDirection="backward">
+        <img src="assets/left.png">
+      </ion-col>
+      <ion-col size="7.5">
+        <span style="font-size: 18px;">{{topic}}</span>
+      </ion-col>
+            <ion-col size="1.5">
+              <img height="20px" src="../../assets/pencil.png">
+            </ion-col>
+      <ion-col size="1.5">
+        <img height="20px" src="../../assets/more.png">
+      </ion-col>
+    </ion-row>
+
+    <p align="center" style="margin: 0px; font-size: 15px; color: white;">Study Session</p>
+    <p align="center" style="margin: 0px;">
+      <ion-progress-bar class="progress" color="medium" [value]="40/100"></ion-progress-bar>
+    </p>
+
+  </div>
+
+
+  <div class="pageBackground">
+
+    <app-answers-ui [cards]="questions"></app-answers-ui>
+    <!-- <div style="padding-top: 20px; padding-left: 20px; padding-right: 20px;">
+      <ion-card
+        style="border-radius: 5px; overflow: auto; border: #F2AD09 solid 1px; margin: 0px; width: 90vw;"
+        [ngStyle]="{'padding-top': topPaddingTop, 'padding-bottom': topPaddingBottom, 'padding-left': topPaddingLeft, 'padding-right':
+        topPaddingRight, 'font-size': questionFontSize, 'height': topHeight}"
+        [innerHtml]="questions[0].question">
+      </ion-card>
+      
+      <p align="center" style="margin: 0px">
+        <img [hidden]="!hideAnswer" (click)="hideOrShowAnswer()" style="bottom: 30px;" height="40px"
+          src="../../assets/arrowup.png">
+        <img [hidden]="hideAnswer" (click)="hideOrShowAnswer()" style="bottom: 30px;" height="40px"
+          src="../../assets/arrowdown.png">
+
+      </p>
+    </div>
+
+    <div style="padding-top: 10px; position: absolute; bottom: 90px; padding-right: 20px; padding-left: 20px;">
+      <ion-card
+        style="border-radius: 5px; border: #F2AD09 solid 1px; margin: 0px; padding: 20px; font-size: 16px; width:
+        90vw; overflow: auto;"
+        [ngStyle]="{'height': bottomHeight, visibility: bottomVisible}" [innerHtml]="questions[0].answer">
+      </ion-card>
+    </div>
+
+        
+    <div style="bottom: 10px; width: 100vw; position: absolute;">
+      <p align="center" style="margin: 0px; font-size: 14px;">How well do you know this?</p>
+
+      <ion-row (click)="goToNextQuestion()"
+        style="margin-top: 10px; justify-content: center; align-items: center; width: 100vw;">
+          <div
+            style="padding-top: 7px;  float: left; border-radius: 25px; margin:
+            5px; font-size: 10px; background-color: #DC2900; padding-bottom: 7px; padding-left: 10px; padding-right:
+            10px;">
+            Total Loss
+          </div>
+
+          <div
+            style="padding-top: 7px; float: left; border-radius: 25px; margin: 5px; font-size: 10px; background-color:
+            #FFB695;
+            padding-bottom: 7px; color: white; padding-left: 10px; padding-right: 10px;">
+            Not Well Enough
+          </div>
+
+          <div
+            style="padding-top: 7px; float: left; border-radius: 25px; margin: 5px; font-size: 10px; background-color:
+            #F1CE55;
+            padding-bottom: 7px; color: white; padding-left: 10px; padding-right: 10px;">
+            Very Well
+          </div>
+
+          <div
+            style="padding-top: 7px; float: left; border-radius: 25px; margin: 5px; font-size: 10px; background-color:
+            #75D91A;
+            padding-bottom: 7px; color: white; padding-left: 10px; padding-right: 10px;">
+            Perfect Recall
+          </div>
+
+      </ion-row>
+    </div> -->
+  </div>
+
+</ion-content>

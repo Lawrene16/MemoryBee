@@ -1,0 +1,11 @@
+<div class="tinder" [hidden]="!cards.length">
+
+  <div id="tindercards" class="tinder--cards">
+
+    <div #tinderCard class="tinder--card" (transitionend)="handleShift()" *ngFor="let card of cards; let i = index"
+      [ngStyle]="{ zIndex: cards.length - i, opacity: card.opacity, height: card.cardHeight, transform: 'scale(' + (21 - i) / 21 + ') translateY(-' + 21 * i + 'px)' }">
+
+      Bla bla bla
+    </div>
+  </div>
+</div>

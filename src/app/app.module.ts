@@ -10,7 +10,11 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AppRoutingModule } from './app-routing.module';
+// import { DragulaModule } from "ng2-dragula";
 // import { HttpModule } from "@angular/http";
+// ...
+
+// import { DragulaModule, DragulaService } from "ng2-dragula";
 
 @NgModule({
   
@@ -20,6 +24,7 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    // DragulaModule.forRoot(),
     IonicModule.forRoot(),
     AppRoutingModule,
   ],
