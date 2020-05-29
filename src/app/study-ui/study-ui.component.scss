@@ -8,7 +8,7 @@
 }
 
 .tinder--cards {
-    padding-top: 90px;
+    padding-top: 150px;
     display: flex;
     flex-direction: column;
     position: fixed;
@@ -16,6 +16,10 @@
     width: 100%;
     height: 52%;
     overflow: hidden;
+}
+
+.tinder--card:nth-child(n+4) {
+    display: none
 }
 
 .tinder--card {

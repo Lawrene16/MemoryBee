@@ -9,20 +9,49 @@ import {
   EventEmitter,
 } from "@angular/core";
 
+
 @Component({
-  selector: "app-answers-ui",
-  templateUrl: "./answers-ui.component.html",
-  styleUrls: ["./answers-ui.component.scss"],
+  selector: "app-test-ui",
+  templateUrl: "./test-ui.component.html",
+  styleUrls: ["./test-ui.component.scss"],
 })
-export class AnswersUiComponent {
+export class TestUiComponent {
   @Output() choiceMade = new EventEmitter();
 
   @Input("cards") cards: Array<{
-    title: string;
+    question: string;
     isContentHidden: any;
-    cardHeight;
     opacity: any;
+    paddingTop: any;
+    paddingLeft: any;
+    paddingRight: any;
+    paddingBottom: any;
+    questionFontSize: any;
+    topHeight: any;
   }>;
+
+  cardsFiltered: Array<{
+    question: string;
+    isContentHidden: any;
+    opacity: any;
+    paddingTop: any;
+    paddingLeft: any;
+    paddingRight: any;
+    paddingBottom: any;
+    questionFontSize: any;
+    topHeight: any;
+  }>;
+
+  topPaddingTop = "100px";
+  topPaddingLeft = "40px";
+  topPaddingRight = "40px";
+  topPaddingBottom = "100px";
+  questionFontSize = "24px";
+  topHeight = "auto";
+  bottomHeight = "10px";
+  bottomVisible = "hidden";
+
+  hideAnswer = true;
 
   @ViewChildren("tinderCard") tinderCards: QueryList<ElementRef>;
   tinderCardsArray: Array<ElementRef>;
@@ -33,30 +62,43 @@ export class AnswersUiComponent {
   heartVisible: boolean;
   crossVisible: boolean;
 
-  constructor(private renderer: Renderer2) // public dragula: DragulaService
-  {
+  constructor(
+    private renderer: Renderer2 // public dragula: DragulaService
+  ) {
     setTimeout(() => {
+      this.cardsFiltered = this.cards;
+      this.cards = [];
+      for (var i = 0; i < this.cardsFiltered.length; i++) {
+        if (i < 3) {
+          this.cards.push(this.cardsFiltered[i]);
+        }
+        this.changeOpacity();
+      }
 
-      this.changeOpacity();
-      let tinderCardElement = document.getElementById("tindercards");
+      let tinderCardElement = document.getElementById("testcards");
       let hamming = new Hammer(tinderCardElement);
       hamming.on("panleft panright tap press pressup panend", (ev) => {
         if (ev.type == "panend") {
           this.handlePanEnd(ev);
         } else if (ev.type == "panright") {
-          if (this.cards.length > 2) {
+          if (this.cardsFiltered.length > 2) {
             this.handlePan(ev);
           }
         } else if (ev.type == "panleft") {
-          if (this.cards.length > 2) {
+          if (this.cardsFiltered.length > 2) {
           }
         }
       });
     }, 300);
+
+    setTimeout(() => {
+      this.changeOpacity();
+    }, 500);
   }
 
-  userClickedButton(event, heart) {
-    event.preventDefault();
+
+  userClickedButton(heart) {
+    // event.preventDefault();
     if (!this.cards.length) return false;
     if (heart) {
       this.renderer.setStyle(
@@ -182,9 +224,10 @@ export class AnswersUiComponent {
   }
 
   switchArrayObjects() {
-    this.cards.push(this.cards[0]);
+    this.cardsFiltered.push(this.cards[0]);
+    this.cardsFiltered.shift();
     this.cards.shift();
-    // this.cards.push(this.cardsFiltered[this.cards.length]);
+    this.cards.push(this.cardsFiltered[this.cards.length]);
   }
 
   changeOpacity() {
@@ -220,5 +263,40 @@ export class AnswersUiComponent {
     this.tinderCards.changes.subscribe(() => {
       this.tinderCardsArray = this.tinderCards.toArray();
     });
+  }
+
+  hideOrShowAnswer() {
+    switch (this.hideAnswer) {
+      case false:
+        this.topPaddingTop = "100px";
+        this.topPaddingLeft = "40px";
+        this.topPaddingRight = "40px";
+        this.topPaddingBottom = "100px";
+        this.questionFontSize = "24px";
+        this.topHeight = "auto";
+        // this.arrowButtonPosition = "53%";
+        this.bottomHeight = "10px";
+        this.bottomVisible = "hidden";
+        break;
+
+      case true:
+        this.topPaddingTop = "10px";
+        this.topPaddingLeft = "20px";
+        this.topPaddingRight = "20px";
+        this.topPaddingBottom = "10px";
+        this.topHeight = "10vh";
+        this.bottomHeight = "55vh";
+        this.bottomVisible = "visible";
+        // this.arrowButtonPosition = "35%";
+        this.questionFontSize = "16px";
+
+        break;
+    }
+
+    this.hideAnswer = !this.hideAnswer;
+  }
+
+  goToNextQuestion() {
+    this.userClickedButton(true);
   }
 }

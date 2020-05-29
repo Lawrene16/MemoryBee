@@ -1,0 +1,37 @@
+<div class="tinder" [hidden]="!cards.length">
+
+  <div id="testcards" class="tinder--cards">
+
+    <div #tinderCard class="tinder--card" (transitionend)="handleShift()" *ngFor="let card of cards; let i = index"
+      style="border-radius: 5px; overflow: auto; border: #F2AD09 solid 1px;" [ngStyle]="{ zIndex: cards.length - i, opacity: card.opacity, transform: 'scale(' + (20 - i) / 20 + ') translateY(-' + 20 * i + 'px)',
+      'padding-top': card.paddingTop, 'padding-bottom': card.paddingBottom, 'padding-left': card.paddingLeft, 'padding-right':
+      card.paddingRight, 'font-size': card.questionFontSize, 'height': card.topHeight}" [innerHtml]="card.question">
+    </div>
+  </div>
+
+
+    <div style="bottom: 10px; width: 100vw; position: absolute;">
+      <p align="center" style="margin: 0px; font-size: 14px;">How well do you know this?</p>
+
+      <ion-row (click)="goToNextQuestion()"
+        style="margin-top: 10px; justify-content: center; align-items: center; width: 100vw;">
+        <ion-col>
+
+        </ion-col>
+        <ion-col>
+          <p align="center" style="margin: 0px;">
+            <img height="25px" src="../../assets/ex.png">
+          </p>
+        </ion-col>
+        <ion-col>
+          <p align="center" style="margin: 0px;">
+            <img height="25px" src="../../assets/good.png">
+          </p>
+        </ion-col>
+        <ion-col>
+
+        </ion-col>
+
+      </ion-row>
+    </div>
+</div>

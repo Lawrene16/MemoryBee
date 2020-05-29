@@ -6004,32 +6004,20 @@ export class TopicsPage implements OnInit {
   constructor(public route: ActivatedRoute, public toastCtrl: ToastController, public router: Router) {}
 
   ngOnInit() {
-    // this.route.queryParams.subscribe((params) => {
-    //   if (this.router.getCurrentNavigation().extras.state) {
-    //     this.subject = this.router.getCurrentNavigation().extras.state.subject;
-    //     this.topicTitlesArray = this.router.getCurrentNavigation().extras.state.topics;
+    this.route.queryParams.subscribe((params) => {
+      if (this.router.getCurrentNavigation().extras.state) {
+        this.subject = this.router.getCurrentNavigation().extras.state.subject;
+        this.topicTitlesArray = this.router.getCurrentNavigation().extras.state.topics;
 
-    //     this.topicTitlesArray.forEach((topicString) => {
-    //       this.topicsArray.push({
-    //         title: topicString,
-    //         questions: this.getQuestions(this.res, this.subject, topicString),
-    //         decks: this.getDecks(this.res, this.subject, topicString),
-    //       });
-    //     });
-    //   }
-    // });
-
-            this.topicTitlesArray.forEach((topicString) => {
-              this.topicsArray.push({
-                title: topicString,
-                questions: this.getQuestions(
-                  this.res,
-                  this.subject,
-                  topicString
-                ),
-                decks: this.getDecks(this.res, this.subject, topicString),
-              });
-            });
+        this.topicTitlesArray.forEach((topicString) => {
+          this.topicsArray.push({
+            title: topicString,
+            questions: this.getQuestions(this.res, this.subject, topicString),
+            decks: this.getDecks(this.res, this.subject, topicString),
+          });
+        });
+      }
+    });
   }
 
   expandQuestions() {

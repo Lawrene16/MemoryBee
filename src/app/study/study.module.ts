@@ -7,7 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { StudyPageRoutingModule } from './study-routing.module';
 
 import { StudyPage } from './study.page';
-import { AnswersUiComponent } from '../answers-ui/answers-ui.component';
+import { StudyUiComponent } from '../study-ui/study-ui.component';
+// import { AnswersUiComponent } from '../answers-ui/answers-ui.component';
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import { AnswersUiComponent } from '../answers-ui/answers-ui.component';
     IonicModule,
     StudyPageRoutingModule
   ],
-  declarations: [StudyPage, AnswersUiComponent]
+  declarations: [StudyPage, StudyUiComponent]
 })
 export class StudyPageModule {}
